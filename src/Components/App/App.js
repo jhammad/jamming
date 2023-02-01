@@ -56,7 +56,7 @@ class App extends React.Component {
           {/* pass the addTrack method to the SearchResults component as an onAdd property */}
           <SearchResults searchResults = {this.state.searchResults} onAdd = {this.addTrack}/>
           {/* pass the playlistName and playlistTracks state to the Playlist component */}
-          <Playlist playlistName = {this.state.playlistName} playlistTracks = {this.state.playlistTracks}/>
+          <Playlist playlistName = {this.state.playlistName} playlistTracks = {this.state.playlistTracks} onRemove ={this.removeTrack}/>
         </div>
       </div>
       </div>
