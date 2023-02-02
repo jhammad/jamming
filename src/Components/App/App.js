@@ -2,6 +2,7 @@ import './App.css';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../PlayList/PlayList';
+import Spotify from '../../util/Spotify';
 import React from 'react';
 import { render } from '@testing-library/react';
 

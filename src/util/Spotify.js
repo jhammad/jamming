@@ -1,5 +1,6 @@
-// clientId is the client ID of the app it will need to be hashed when uplaoding it to the repository 
-const clientId = 'fefc16ee1942462bb2f82a7ea0360628';
+import SearchBar from "../Components/SearchBar/SearchBar";
+
+// clientId is the client ID of the app it will need to be deleted when uploading it to the repository 
 
 // redirectUri is the URL of the app
 const redirectUri = 'http://localhost:3000/';
@@ -32,11 +33,34 @@ const Spotify = {
             // pushState will clear the parameters, allowing us to grab a new access token when it expires
             window.history.pushState('Access Token', null, '/');
             // redirect user to the following url interpolated with the clientId and redirectUri variables
-            window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
-
-        
-        }        
-    }}        
-
-
+            window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;        
+        }            
+    },
+    // search is a method that takes a term as an argument and returns a promise that resolves to an array of tracks that match the search term
+    search(term) {
+        // fetch the access token from the Spotify API and return a promise that resolves to the JSON response
+        return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
+            headers: { Authorization: `Bearer ${token}` }
+        //  concate a then method to the promise that returns a promise that resolves to the JSON response
+        }).then(response => {
+            return response.json();
+        }
+        // concate a then method to the promise that returns a promise that resolves to an array of tracks
+        ).then(jsonResponse => {
+            // if there is no tracks in the JSON response, return an empty array
+            if (!jsonResponse.tracks) {
+                return [];
+            }
+            // if there is a tracks in the JSON response, return an array of tracks
+            return jsonResponse.tracks.items.map(track => ({
+                ID: track.id,
+                Name: track.name,
+                Artist: track.artists[0].name,
+                Album: track.album.name,
+                URI: track.uri
+            }));
+        }
+        );
+    }
+};   
 export default Spotify;
