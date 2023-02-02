@@ -1,5 +1,3 @@
-import SearchBar from "../Components/SearchBar/SearchBar";
-
 // clientId is the client ID of the app it will need to be deleted when uploading it to the repository 
 const clientId = 'fefc16ee1942462bb2f82a7ea0360628';
 
@@ -38,9 +36,9 @@ const Spotify = {
         }            
     },
     // search is a method that takes a term as an argument and returns a promise that resolves to an array of tracks that match the search term
-    search(term) {
+    search(searchTerm) {
         // fetch the access token from the Spotify API and return a promise that resolves to the JSON response
-        return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
+        return fetch(`https://api.spotify.com/v1/search?type=track&q=${searchTerm}`, {
             headers: { Authorization: `Bearer ${token}` }
         //  concate a then method to the promise that returns a promise that resolves to the JSON response
         }).then(response => {

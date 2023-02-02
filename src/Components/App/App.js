@@ -4,7 +4,6 @@ import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../PlayList/PlayList';
 import Spotify from '../../util/Spotify';
 import React from 'react';
-import { render } from '@testing-library/react';
 
 class App extends React.Component {
   constructor(props){
@@ -84,6 +83,7 @@ class App extends React.Component {
       <h1>Ja<span className ="highlight">mmm</span>ing</h1>
       <div className ="App">
         {/* /* <!-- Add a SearchBar component --> */ }
+        <SearchBar onSearch = {this.search}/>
         <div className="App-playlist">          
           {/* pass the searchResults state to the SearchResults component */}
           {/* pass the addTrack method to the SearchResults component as an onAdd property */}
