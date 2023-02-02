@@ -20,10 +20,12 @@ class App extends React.Component {
         {name: 'name2', artist: 'artist2', album: 'album2', id: 2}
       ]
     }
-    // binding the addTrack method to the App component's this value
+    // binding the addTrack method to the App component
     this.addTrack = this.addTrack.bind(this);
-    // binding the removeTrack method to the App component's this value
+    // binding the removeTrack method to the App component
     this.removeTrack = this.removeTrack.bind(this);
+    // binding the this.updatePlaylistName method to the App component
+    this.updatePlaylistName = this.updatePlaylistName.bind(this);
   }
 
   // method to add a track to the playlistTracks state
@@ -44,6 +46,11 @@ class App extends React.Component {
     // set this.state.playlistTracks to the new array of tracks
     this.setState({playlistTracks: this.state.playlistTracks});
   }
+
+  // method to update the playlistName state
+  updatePlaylistName(name){
+    this.setState({playlistName: name});
+  }
      
   render(){
     return (
@@ -56,7 +63,7 @@ class App extends React.Component {
           {/* pass the addTrack method to the SearchResults component as an onAdd property */}
           <SearchResults searchResults = {this.state.searchResults} onAdd = {this.addTrack}/>
           {/* pass the playlistName and playlistTracks state to the Playlist component */}
-          <Playlist playlistName = {this.state.playlistName} playlistTracks = {this.state.playlistTracks} onRemove ={this.removeTrack}/>
+          <Playlist playlistName = {this.state.playlistName} playlistTracks = {this.state.playlistTracks} onRemove ={this.removeTrack} onNameChange = {this.updatePlaylistName}/>
         </div>
       </div>
       </div>
