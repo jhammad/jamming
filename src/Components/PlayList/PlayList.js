@@ -18,8 +18,8 @@ class Playlist extends React.Component {
         <input defaultValue = {'New Playlist'}  />
         {/* passing the playlistTracks state to the TrackList component the playlistTracks state is defined in the App component */}
         {/* onRemove will be passed to the Track component and will be used to remove a track from the playlist */}
-        <TrackList tracks = {this.props.playlistTracks} onRemove = {this.onRemove} isRemoval ="true" onChange = {this.handleNameChange}/>
-        <button class="Playlist-save">SAVE TO SPOTIFY</button>
+        <TrackList tracks = {this.props.playlistTracks} onRemove = {this.props.onRemove} isRemoval ="true" onChange = {this.handleNameChange}/>
+        <button class="Playlist-save" onClick={this.props.onSave}>SAVE TO SPOTIFY</button>
       </div>
     );
   }

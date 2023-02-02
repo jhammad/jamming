@@ -26,6 +26,10 @@ class App extends React.Component {
     this.removeTrack = this.removeTrack.bind(this);
     // binding the this.updatePlaylistName method to the App component
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
+    // binding the this.savePlaylist method to the App component
+    this.savePlaylist = this.savePlaylist.bind(this);
+    // binding the this.search method to the App component
+    this.search = this.search.bind(this);
   }
 
   // method to add a track to the playlistTracks state
@@ -51,6 +55,17 @@ class App extends React.Component {
   updatePlaylistName(name){
     this.setState({playlistName: name});
   }
+
+  savePlaylist(){
+    // create an array of track URIs from the playlistTracks state mappping over the playlistTracks state and returning the track.uri
+    const trackURIs = this.state.playlistTracks.map(track => track.uri);  
+  }
+
+  search(searchTerm){
+    console.log(searchTerm);
+  }
+
+
      
   render(){
     return (
@@ -61,9 +76,10 @@ class App extends React.Component {
         <div className="App-playlist">          
           {/* pass the searchResults state to the SearchResults component */}
           {/* pass the addTrack method to the SearchResults component as an onAdd property */}
-          <SearchResults searchResults = {this.state.searchResults} onAdd = {this.addTrack}/>
+          <SearchResults searchResults = {this.state.searchResults} onAdd = {this.addTrack} onSearch = {this.search}/>
           {/* pass the playlistName and playlistTracks state to the Playlist component */}
-          <Playlist playlistName = {this.state.playlistName} playlistTracks = {this.state.playlistTracks} onRemove ={this.removeTrack} onNameChange = {this.updatePlaylistName}/>
+          <Playlist playlistName = {this.state.playlistName} playlistTracks = {this.state.playlistTracks}
+          onRemove ={this.removeTrack} onNameChange = {this.updatePlaylistName} onSave = {this.savePlaylist}/>
         </div>
       </div>
       </div>
