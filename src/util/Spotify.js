@@ -1,6 +1,7 @@
 import SearchBar from "../Components/SearchBar/SearchBar";
 
 // clientId is the client ID of the app it will need to be deleted when uploading it to the repository 
+const clientId = 'fefc16ee1942462bb2f82a7ea0360628';
 
 // redirectUri is the URL of the app
 const redirectUri = 'http://localhost:3000/';
@@ -61,6 +62,52 @@ const Spotify = {
             }));
         }
         );
-    }
+    },
+
+    // method that accepts a playlist name and an array of track URIs
+    savePlaylist(playlistname, trackUris) {
+        // if there is no name or track URIs, we return (we used the length value to check if the array is empty)
+        if (!playlistname || !trackUris.length) {
+            return;
+        }
+        // fetch the access token from the Spotify API and return a promise that resolves to the JSON response using the getAccessToken method
+        const accessToken = Spotify.getAccessToken();
+        // headers is an object that contains the access token of the user Bearer is the type of the token (used also in the fetch method)
+        const headers = { Authorization: `Bearer ${accessToken}` };
+        // userID is the user ID of the user
+        let userID = '';
+        // fetch the user ID from the Spotify API and return a promise that resolves to the JSON response 
+        return fetch('https://api.spotify.com/v1/me', { headers: headers }
+        // concate a then method to the promise that returns a promise that resolves to the JSON response
+        ).then(response => {
+            return response.json();
+        }
+        // concate a then method to the promise that returns a promise that resolves to the user ID
+        ).then(jsonResponse => {
+            // set the user ID to the value ID of the jsonResponse 
+            userID = jsonResponse.id;
+            // fetch the user ID from the Spotify API and return a promise that resolves to the JSON response
+            return fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
+                headers: headers,
+                method: 'POST',
+                // stringify will convert the object to a JSON string
+                body: JSON.stringify({ name: playlistname })
+            // concate a then method to the promise that returns a promise that resolves to the JSON response
+            }).then(response => {
+                return response.json();
+            }
+            // concate a then method to the promise that returns a promise that resolves to the playlist ID
+            ).then(jsonResponse => {
+                // set the playlist ID to the ID of the playlist
+                const playlistID = jsonResponse.id;
+                // fetch the playlist ID from the Spotify API and return a promise that resolves to the JSON response
+                return fetch(`https://api.spotify.com/v1/users/${userID}/playlists/${playlistID}/tracks`, {
+                    headers: headers,
+                    method: 'POST',
+                    body: JSON.stringify({ uris: trackUris })
+                });
+            });
+        });
+    }    
 };   
 export default Spotify;

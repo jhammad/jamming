@@ -58,14 +58,24 @@ class App extends React.Component {
   }
 
   savePlaylist(){
-    // create an array of track URIs from the playlistTracks state mappping over the playlistTracks state and returning the track.uri
-    const trackURIs = this.state.playlistTracks.map(track => track.uri);  
+    // create an array of track URIs
+    const trackURIs = this.state.playlistTracks.map(track => track.uri);
+    // call the savePlaylist method from the Spotify module passing in the playlistName and trackURIs
+    Spotify.savePlaylist(this.state.playlistName, trackURIs).then(() => {
+      // set the playlistName state to 'New Playlist'
+      this.setState({playlistName: 'New Playlist'});
+      // set the playlistTracks state to an empty array
+      this.setState({playlistTracks: []});
+    });     
   }
 
   search(searchTerm){
-    console.log(searchTerm);
+    // call the search method from the Spotify module passing in the searchTerm
+    Spotify.search(searchTerm).then(searchResults => {
+      // set the searchResults state to the searchResults returned from the Spotify.search method
+      this.setState({searchResults: searchResults});
+    });
   }
-
 
      
   render(){
