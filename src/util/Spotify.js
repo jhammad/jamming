@@ -4,8 +4,9 @@ const clientId = 'fefc16ee1942462bb2f82a7ea0360628';
 // redirectUri is the URL of the app
 const redirectUri = 'http://localhost:3000/';
 
-// token is the access token for the Spotify token  of the user will be set as empty because we will grab it later
-const token = '';
+// token is the access token for the Spotify token  of the user will be set
+// as empty because we will grab it later // it need to be a let because we will change it later
+let token = '';
 
 // Spotify object
 const Spotify = {
@@ -14,7 +15,7 @@ const Spotify = {
         if (token) {
             return token;
         }
-        // if the token is not set, check if the URL contains an access token
+        // if the token is not set, check if the URL contains an access token        
         // const accessTokenMatch is the access token from the URL of the user the match method returns an array of matches
         const accessTokenMatch = window.location.href.match(/access_token=([^&]*)/);     
         // const expiresInMatch is the expiration time of the access token from the URL of the user the match method returns an array of matches
@@ -22,7 +23,9 @@ const Spotify = {
         // if the URL contains an access token and an expiration time, set the token and expiration time
         if (accessTokenMatch && expiresInMatch) {
             // first of the array of the matches
+            console.log(accessTokenMatch)
             token = accessTokenMatch[1];
+            console.log(token)
             // second of the array of the expiration time
             const expiresIn = Number(expiresInMatch[1]);
             // clear the parameters, allowing us to grab a new access token when it expires
@@ -35,6 +38,7 @@ const Spotify = {
             return token;
         } else {
             // redirect user to the following url interpolated with the clientId and redirectUri variables
+            // redirectUri needs to be added to the accepted Spotify redirect URIs on the Spotify API 
             window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;        
         }            
     },
@@ -42,6 +46,7 @@ const Spotify = {
     search(searchTerm) {
         // it's necessary to obtain a new access token triggering the Spotify authorization flow.
         const token = Spotify.getAccessToken();
+        console.log(token)
         // fetch the access token from the Spotify API and return a promise that resolves to the JSON response
         return fetch(`https://api.spotify.com/v1/search?type=track&q=${searchTerm}`, {
             headers: { Authorization: `Bearer ${token}` }
