@@ -31,12 +31,17 @@ const Spotify = {
             // history.pushState is used to manipulate the browser's session history in order to create a new entry
             // pushState will clear the parameters, allowing us to grab a new access token when it expires
             window.history.pushState('Access Token', null, '/');
+            // return the token
+            return token;
+        } else {
             // redirect user to the following url interpolated with the clientId and redirectUri variables
             window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;        
         }            
     },
     // search is a method that takes a term as an argument and returns a promise that resolves to an array of tracks that match the search term
     search(searchTerm) {
+        // it's necessary to obtain a new access token triggering the Spotify authorization flow.
+        const token = Spotify.getAccessToken();
         // fetch the access token from the Spotify API and return a promise that resolves to the JSON response
         return fetch(`https://api.spotify.com/v1/search?type=track&q=${searchTerm}`, {
             headers: { Authorization: `Bearer ${token}` }
@@ -52,11 +57,11 @@ const Spotify = {
             }
             // if there is a tracks in the JSON response, return an array of tracks
             return jsonResponse.tracks.items.map(track => ({
-                ID: track.id,
-                Name: track.name,
-                Artist: track.artists[0].name,
-                Album: track.album.name,
-                URI: track.uri
+                id: track.id,
+                name: track.name,
+                artist: track.artists[0].name,
+                album: track.album.name,
+                uri: track.uri            
             }));
         }
         );
