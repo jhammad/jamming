@@ -7,6 +7,16 @@ class Track extends React.Component {
         this.addTrack = this.addTrack.bind(this);
         this.removeTrack = this.removeTrack.bind(this);
     }
+
+    // addTrack method that will call the onAdd method that was passed to the Track component from the App component
+    addTrack() {
+      this.props.onAdd(this.props.track);
+    }
+    
+    // removeTrack method that will call the onRemove method that was passed to the Track component from the App component
+    removeTrack() {
+        this.props.onRemove(this.props.track);
+    }
     render() {
         return (
         <div className="Track">
@@ -15,20 +25,17 @@ class Track extends React.Component {
           <h3>{this.props.track.name}</h3>
           <p>{this.props.track.artist} | {this.props.track.album}</p>
         </div>
-        <button className="Track-action"></button>
+        <button className="Track-action">
+          {/* <!-- + or - will go here --> */}
+          {this.renderAction()}
+        </button>
       </div>
         );
     }    
-    // addTrack method that will call the onAdd method that was passed to the Track component from the App component
-    addTrack() {
-        this.props.onAdd(this.props.track);
-    }
-    
-    // removeTrack method that will call the onRemove method that was passed to the Track component from the App component
-    removeTrack() {
-        this.props.onRemove(this.props.track);
-    }
 
+    // Needs to add the isRemoval property to the Track component. This property will be used to determine
+    //  if the track should render a + or - sign. If the value of isRemoval is true, then the track should 
+    //  render a - sign, otherwise it should render a + sign.
     renderAction() {
       if (this.props.isRemoval) {
         return <a className="Track-action" onClick = {this.removeTrack}>-</a>
