@@ -1,7 +1,7 @@
 // clientId is the client ID of the app it will need to be deleted when uploading it to the repository \
 // redirectUri is the URL of the app
-// const redirectUri = 'http://jamming.javierhammad.surge.sh/';
 const redirectUri = 'http://localhost:3000/';
+
 
 
 // token is the access token for the Spotify token  of the user will be set
