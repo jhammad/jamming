@@ -34,8 +34,10 @@ class App extends React.Component {
 
   // method to add a track to the playlistTracks state
   addTrack(track){
+    // define tracks as the playlistTracks state
+    let tracks = this.state.playlistTracks;
     // check if the track is already in the playlistTracks state
-    if (this.state.playlistTracks.find(savedTrack => savedTrack.id === track.id)) {
+    if (tracks.find(savedTrack => savedTrack.id === track.id)) {
       return;
     }
     // if the track is not in the playlistTracks state, add it to the playlistTracks state
@@ -51,7 +53,8 @@ class App extends React.Component {
   removeTrack(track){
     // filter the playlistTracks state to remove the track that has the same id as the track passed in
     // this.state.playListTrack is defined by the state of the playlistTracks property in the App component's constructor method.
-    this.state.playlistTracks = this.state.playlistTracks.filter(savedTrack => savedTrack.id !== track.id);
+    let tracks = this.state.playlistTracks;
+    tracks = this.state.playlistTracks.filter(savedTrack => savedTrack.id !== track.id);
     // set this.state.playlistTracks to the new array of tracks
     this.setState({playlistTracks: this.state.playlistTracks});
     console.log(this.state.playlistTracks)

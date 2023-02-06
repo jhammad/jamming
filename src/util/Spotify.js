@@ -1,6 +1,8 @@
 // clientId is the client ID of the app it will need to be deleted when uploading it to the repository \
 // redirectUri is the URL of the app
+// const redirectUri = 'http://jamming.javierhammad.surge.sh/';
 const redirectUri = 'http://localhost:3000/';
+
 
 // token is the access token for the Spotify token  of the user will be set
 // as empty because we will grab it later // it need to be a let because we will change it later
@@ -43,7 +45,7 @@ const Spotify = {
     // search is a method that takes a term as an argument and returns a promise that resolves to an array of tracks that match the search term
     search(searchTerm) {
         // it's necessary to obtain a new access token triggering the Spotify authorization flow.
-        const token = Spotify.getAccessToken();
+        const token = Spotify.getAccessToken();        
         console.log(token)
         // fetch the access token from the Spotify API and return a promise that resolves to the JSON response
         return fetch(`https://api.spotify.com/v1/search?type=track&q=${searchTerm}`, {
