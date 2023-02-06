@@ -1,4 +1,6 @@
 // clientId is the client ID of the app it will need to be deleted when uploading it to the repository \
+const clientId = 'fefc16ee1942462bb2f82a7ea0360628';
+
 // redirectUri is the URL of the app
 const redirectUri = 'http://localhost:3000/';
 
@@ -83,7 +85,7 @@ const Spotify = {
         // headers is an object that contains the access token of the user Bearer is the type of the token (used also in the fetch method)
         const headers = { Authorization: `Bearer ${accessToken}` };
         // userID is the user ID of the user
-        let userID = '';
+        let userID ;
         // fetch the user ID from the Spotify API and return a promise that resolves to the JSON response 
         return fetch('https://api.spotify.com/v1/me', { headers: headers }
         // concate a then method to the promise that returns a promise that resolves to the JSON response

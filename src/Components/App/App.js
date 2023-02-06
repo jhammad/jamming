@@ -51,12 +51,13 @@ class App extends React.Component {
 
   // method to remove a track from the playlistTracks state
   removeTrack(track){
+    console.log("removeTrack method called")
     // filter the playlistTracks state to remove the track that has the same id as the track passed in
     // this.state.playListTrack is defined by the state of the playlistTracks property in the App component's constructor method.
     let tracks = this.state.playlistTracks;
-    tracks = this.state.playlistTracks.filter(savedTrack => savedTrack.id !== track.id);
+    tracks = tracks.filter(savedTrack => savedTrack.id !== track.id);
     // set this.state.playlistTracks to the new array of tracks
-    this.setState({playlistTracks: this.state.playlistTracks});
+    this.setState({playlistTracks: tracks});
     console.log(this.state.playlistTracks)
   }
 
@@ -97,10 +98,10 @@ class App extends React.Component {
         <div className="App-playlist">          
           {/* pass the searchResults state to the SearchResults component */}
           {/* pass the addTrack method to the SearchResults component as an onAdd property */}
-          <SearchResults searchResults = {this.state.searchResults} onAdd = {this.addTrack} onSearch = {this.search}/>
+          <SearchResults searchResults = {this.state.searchResults} onAdd = {this.addTrack}/>
           {/* pass the playlistName and playlistTracks state to the Playlist component */}
-          <Playlist playlistName = {this.state.playlistName} onRemove = {this.removeTrack} playlistTracks = {this.state.playlistTracks}
-          onNameChange = {this.updatePlaylistName} onSave = {this.savePlaylist}/>
+          <Playlist playlistName = {this.state.playlistName} playlistTracks = {this.state.playlistTracks}
+          onNameChange = {this.updatePlaylistName} onRemove = {this.removeTrack} onSave = {this.savePlaylist}/>
         </div>
       </div>
       </div>
