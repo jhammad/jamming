@@ -17,7 +17,7 @@ class App extends React.Component {
       playlistName: 'My Playlist',
       // playlistTracks that will be passed to the Playlist component
       playlistTracks: [
-        {name: 'name2', artist: 'artist2', album: 'album2', id: 2}
+        {name: '', artist: '', album: '', id: 2}
       ]
     }
     // binding the addTrack method to the App component
@@ -42,14 +42,21 @@ class App extends React.Component {
     this.state.playlistTracks.push(track);
     // set the playlistTracks state to the new array of tracks
     this.setState({playlistTracks: this.state.playlistTracks});
+    console.log(this.state.playlistTracks)
   }
 
+
+
+  // method to remove a track from the playlistTracks state
   removeTrack(track){
     // filter the playlistTracks state to remove the track that has the same id as the track passed in
-    this.state.playlistTracks.filter(savedTrack => savedTrack.id !== track.id);
+    // this.state.playListTrack is defined by the state of the playlistTracks property in the App component's constructor method.
+    this.state.playlistTracks = this.state.playlistTracks.filter(savedTrack => savedTrack.id !== track.id);
     // set this.state.playlistTracks to the new array of tracks
     this.setState({playlistTracks: this.state.playlistTracks});
+    console.log(this.state.playlistTracks)
   }
+
 
   // method to update the playlistName state
   updatePlaylistName(name){

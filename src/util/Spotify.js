@@ -1,5 +1,4 @@
 // clientId is the client ID of the app it will need to be deleted when uploading it to the repository \
-const clientId = 'fefc16ee1942462bb2f82a7ea0360628';
 // redirectUri is the URL of the app
 const redirectUri = 'http://localhost:3000/';
 
