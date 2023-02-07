@@ -11,13 +11,13 @@ class App extends React.Component {
     this.state = {
       // Setting the state of the searchResults property to an array of 1 object.
       searchResults: [ 
-        {name: 'name1', artist: 'artist1', album: 'album1', id: 1}
+        
       ],
       // playlistName that will be passed to the Playlist component
       playlistName: 'My Playlist',
       // playlistTracks that will be passed to the Playlist component
       playlistTracks: [
-        {name: '', artist: '', album: '', id: 2}
+        
       ]
     }
     // binding the addTrack method to the App component
@@ -30,6 +30,7 @@ class App extends React.Component {
     this.savePlaylist = this.savePlaylist.bind(this);
     // binding the this.search method to the App component
     this.search = this.search.bind(this);
+   
   }
 
   // method to add a track to the playlistTracks state
@@ -46,6 +47,9 @@ class App extends React.Component {
     this.setState({playlistTracks: this.state.playlistTracks});
     console.log(this.state.playlistTracks)
   }
+
+
+  
 
 
 
@@ -84,7 +88,7 @@ class App extends React.Component {
     Spotify.search(searchTerm).then(searchResults => {
       // set the searchResults state to the searchResults returned from the Spotify.search method
       this.setState({searchResults: searchResults});
-    });
+    });  
   }
 
      

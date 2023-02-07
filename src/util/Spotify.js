@@ -25,9 +25,7 @@ const Spotify = {
         // if the URL contains an access token and an expiration time, set the token and expiration time
         if (accessTokenMatch && expiresInMatch) {
             // first of the array of the matches
-            console.log(accessTokenMatch)
             token = accessTokenMatch[1];
-            console.log(token)
             // second of the array of the expiration time
             const expiresIn = Number(expiresInMatch[1]);
             // clear the parameters, allowing us to grab a new access token when it expires
@@ -46,9 +44,9 @@ const Spotify = {
     },
     // search is a method that takes a term as an argument and returns a promise that resolves to an array of tracks that match the search term
     search(searchTerm) {
+        
         // it's necessary to obtain a new access token triggering the Spotify authorization flow.
         const token = Spotify.getAccessToken();        
-        console.log(token)
         // fetch the access token from the Spotify API and return a promise that resolves to the JSON response
         return fetch(`https://api.spotify.com/v1/search?type=track&q=${searchTerm}`, {
             headers: { Authorization: `Bearer ${token}` }
@@ -63,12 +61,15 @@ const Spotify = {
                 return [];
             }
             // if there is a tracks in the JSON response, return an array of tracks
+            console.log(jsonResponse)
+            // this return will be used in the SearchResults component
             return jsonResponse.tracks.items.map(track => ({
                 id: track.id,
                 name: track.name,
                 artist: track.artists[0].name,
                 album: track.album.name,
-                uri: track.uri            
+                preview: track.preview_url,
+                uri: track.uri                            
             }));
         }
         );
