@@ -8,7 +8,6 @@ class Track extends React.Component {
         super(props);
         this.addTrack = this.addTrack.bind(this);
         this.removeTrack = this.removeTrack.bind(this);
-        this.checkaudiosrc = this.checkaudiosrc.bind(this);
     }
 
     // addTrack method that will call the onAdd method that was passed to the Track component from the App component
@@ -22,15 +21,7 @@ class Track extends React.Component {
         this.props.onRemove(this.props.track);
     }
 
-    checkaudiosrc(event) {
-      if (this.props.track.preview === null) {
-        alert("No preview available for this track");
-      }
-      else {
-        return this.props.track.preview;
-      }
-    }
-
+    
   
     // Needs to add the isRemoval property to the Track component. This property will be used to determine
     //  if the track should render a + or - sign. If the value of isRemoval is true, then the track should 
