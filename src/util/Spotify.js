@@ -61,7 +61,6 @@ const Spotify = {
                 return [];
             }
             // if there is a tracks in the JSON response, return an array of tracks
-            console.log(jsonResponse)
             // this return will be used in the SearchResults component
             return jsonResponse.tracks.items.map(track => ({
                 id: track.id,

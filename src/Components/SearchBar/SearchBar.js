@@ -16,7 +16,6 @@ class SearchBar extends React.Component {
   // method to call the onSearch method passed in from the App component
   search() {
     this.props.onSearch(this.state.searchTerm);
-    console.log("search button clicked")
   }
 
   // method to set the state of the searchTerm property to the value of the input element
@@ -28,7 +27,6 @@ class SearchBar extends React.Component {
   handleKeypress(event) {
     if (event.keyCode === 13) { 
         this.search(event);
-        console.log("enter pressed")
         } 
   };  
 
