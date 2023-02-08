@@ -14,9 +14,8 @@ class SearchBar extends React.Component {
 
 
   // method to call the onSearch method passed in from the App component
-  search(event) {
+  search() {
     this.props.onSearch(this.state.searchTerm);
-    event.preventDefault();
     console.log("search button clicked")
   }
 
