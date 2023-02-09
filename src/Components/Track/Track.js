@@ -1,6 +1,9 @@
 import React from 'react';
 import './Track.css';
-import ReactAudioPlayer from 'react-audio-player';
+// Audioplayer installed through npm
+// import AudioPlayer from 'react-h5-audio-player';
+// Audio Player css to change the style of it
+import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player'
 
 
 class Track extends React.Component {
@@ -46,17 +49,23 @@ class Track extends React.Component {
           {/* props are passed to the Track component from the TrackList component */}
           <h3>{this.props.track.name}</h3>
           <p>{this.props.track.artist} | {this.props.track.album}</p>
-          </div>
-          <div className='audio-player'>
-          <ReactAudioPlayer
-              src= {this.props.track.preview}
-              autoPlay = {false}
-              controls = {true}
-              />
-          </div>
-                           
-        
-        <a className="Track-action">
+          </div>      
+                                   
+        <a className="Track-action">      
+          {/* play the song  */}
+          <AudioPlayer 
+                src={this.props.track.preview}
+                // remove autoPlay
+                autoPlay={false}
+                // get rid of the volume controls
+                customVolumeControls={[]}
+                // get rid of the customAdditionalControls
+                customAdditionalControls={[]}
+                // get rid of the showJump controls
+                // the time is hidden through css with the .rhap_time class
+                showJumpControls={false} 
+                
+                />  
           {/* <!-- + or - will go here --> */}
           {/* this.props.isRemoval needs to be passed to the renderAction method to determine if the track should render a + or - sign */}
           {this.renderAction(this.props.isRemoval)}
@@ -67,3 +76,5 @@ class Track extends React.Component {
     
  }
 export default Track;
+
+

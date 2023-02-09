@@ -6,8 +6,9 @@
 
 .Track-action {
   cursor: pointer;
-  padding: .5rem;
+  padding: 1rem;
   font-size: 1.5rem;
+  font-weight: bold;
   transition: color .25s;
   border: 0px;
   background-color: rgba(0, 0, 0, 0);
@@ -37,26 +38,30 @@
   color: rgba(256, 256, 256, 0.8);
 }
 
-.audio-player {
+/* style the time of the audio player  */
+.rhap_time {
+  visibility: hidden;
+}
+/* style the play button of the audio player */
+/* .rhap_main-controls { 
+} */
+
+/* style the play button of the audio player */
+.rhap_play-pause-button {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 10px;
-  width: 60px;
-  padding: 2rem;          
+  align-items: left;
+  color: #fff;
+  font-size: 2rem;
+  transition: color .25s;
+  border: 0px;
+  background-color: rgba(0, 0, 0, 0);
 }
 
- 
+
+
 
 @media only screen and (max-width: 1020px) {
-  .audio-player {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 10px;
-    width: 50px;
-    padding: 0.5rem;
-  }
+
 }
   
 

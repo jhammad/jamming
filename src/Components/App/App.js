@@ -94,7 +94,7 @@ class App extends React.Component {
      
   render(){
     return (
-      <div className="wrapper">
+      <div>
       <h1>Spotify<span className ="highlight">Playlist</span>ing</h1>
       <div className ="App">
         {/* /* <!-- Add a SearchBar component --> */ }

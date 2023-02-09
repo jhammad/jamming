@@ -15,7 +15,7 @@ class Playlist extends React.Component {
   render() {
     return (
         <div className="Playlist">
-        <input onChange={this.handleNameChange} defaultValue = {'New Playlist'}  />
+        <input onChange={this.handleNameChange} defaultValue = {'Type new playlist title'}  />
         {/* passing the playlistTracks state to the TrackList component the playlistTracks state is defined in the App component */}
         {/* onRemove will be passed to the Track component and will be used to remove a track from the playlist */}
         {/* isRemoval will be passed to the Track component and will be used to determine if the track should render a + or - sign */}
