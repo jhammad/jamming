@@ -2,7 +2,7 @@
 const clientId = 'fefc16ee1942462bb2f82a7ea0360628';
 
 // redirectUri is the URL of the app
-const redirectUri = 'http://localhost:3000/';
+const redirectUri = 'http://jamming.javierhammad.surge.sh/';
 
 
 
