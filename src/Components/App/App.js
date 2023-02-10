@@ -1,25 +1,21 @@
+import React from 'react';
 import './App.css';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../PlayList/PlayList';
 import Spotify from '../../util/Spotify';
-import React from 'react';
 
 class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       // Setting the state of the searchResults property to an array of 1 object.
-      searchResults: [ 
-        
-      ],
+      searchResults: [],
       // playlistName that will be passed to the Playlist component
       playlistName: 'My Playlist',
       // playlistTracks that will be passed to the Playlist component
-      playlistTracks: [
-        
-      ]
-    }
+      playlistTracks: []
+    };
     // binding the addTrack method to the App component
     this.addTrack = this.addTrack.bind(this);
     // binding the removeTrack method to the App component
@@ -31,6 +27,20 @@ class App extends React.Component {
     // binding the this.search method to the App component
     this.search = this.search.bind(this);
    
+  }
+  // The search method will be passed to the SearchBar component as a prop. The SearchBar component will call the
+  // search method when the user enters a search term and clicks the search button. The search method will 
+  // call the search method from the Spotify module and pass in the search term. The search method from the
+  // Spotify module will return a promise. The search method will then set the searchResults state to the
+  //  searchResults returned from the Spotify.search method.
+  search(searchTerm){ 
+
+    // call the search method from the Spotify module passing in the searchTerm
+    Spotify.search(searchTerm).then(searchResults => {
+      // set the searchResults state to the searchResults returned from the Spotify.search method
+      this.setState({searchResults: searchResults});
+    });  
+    console.log("search in App.js")
   }
 
   // method to add a track to the playlistTracks state
@@ -71,7 +81,7 @@ class App extends React.Component {
     this.setState({playlistName: name});
   }
 
-  savePlaylist(){
+  savePlaylist(event){
     // create an array of track URIs
     const trackURIs = this.state.playlistTracks.map(track => track.uri);
     // call the savePlaylist method from the Spotify module passing in the playlistName and trackURIs
@@ -80,16 +90,11 @@ class App extends React.Component {
       this.setState({playlistName: 'New Playlist'});
       // set the playlistTracks state to an empty array
       this.setState({playlistTracks: []});
-    });     
+    });
+    event.preventDefault();     
   }
 
-  search(searchTerm){
-    // call the search method from the Spotify module passing in the searchTerm
-    Spotify.search(searchTerm).then(searchResults => {
-      // set the searchResults state to the searchResults returned from the Spotify.search method
-      this.setState({searchResults: searchResults});
-    });  
-  }
+ 
 
      
   render(){

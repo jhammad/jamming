@@ -2,7 +2,9 @@
 const clientId = 'fefc16ee1942462bb2f82a7ea0360628';
 
 // redirectUri is the URL of the app
-const redirectUri = 'http://jamming.javierhammad.surge.sh/';
+// const redirectUri = 'http://jamming.javierhammad.surge.sh/';
+const redirectUri = 'http://localhost:3000/';
+
 
 
 
@@ -44,7 +46,7 @@ const Spotify = {
     },
     // search is a method that takes a term as an argument and returns a promise that resolves to an array of tracks that match the search term
     search(searchTerm) {
-        
+        console.log('search method called in Spotify.js')     
         // it's necessary to obtain a new access token triggering the Spotify authorization flow.
         const token = Spotify.getAccessToken();        
         // fetch the access token from the Spotify API and return a promise that resolves to the JSON response
@@ -70,7 +72,7 @@ const Spotify = {
                 preview: track.preview_url,
                 uri: track.uri                            
             }));
-        }
+        }        
         );
     },
 

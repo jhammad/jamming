@@ -4,6 +4,10 @@ import "./SearchBar.css";
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      searchTerm: ''
+    }
   
     // it's always necessary to bind the methods to the component in the constructor
     this.search = this.search.bind(this);
@@ -12,21 +16,27 @@ class SearchBar extends React.Component {
 
   }
 
+   // method to set the state of the searchTerm property to the value of the input element
+   handleTermChange(event) {
+    this.setState({ searchTerm: event.target.value });
+    event.preventDefault();
+  }
+
 
   // method to call the onSearch method passed in from the App component
-  search() {
+  search(event) {
     this.props.onSearch(this.state.searchTerm);
+    console.log("search in SearchBar.js")
+    event.preventDefault();
   }
 
-  // method to set the state of the searchTerm property to the value of the input element
-  handleTermChange(event) {
-    this.setState({ searchTerm: event.target.value });
-  }
+ 
 
  // method to handle the enter key press
   handleKeypress(event) {
     if (event.keyCode === 13) { 
-        this.search(event);
+       event.preventDefault();
+       this.search(event);
         } 
   };  
 
