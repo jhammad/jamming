@@ -28,13 +28,13 @@ class App extends React.Component {
     this.search = this.search.bind(this);
    
   }
-  // The search method will be passed to the SearchBar component as a prop. The SearchBar component will call the
-  // search method when the user enters a search term and clicks the search button. The search method will 
-  // call the search method from the Spotify module and pass in the search term. The search method from the
-  // Spotify module will return a promise. The search method will then set the searchResults state to the
-  //  searchResults returned from the Spotify.search method.
-  search(searchTerm){ 
 
+  // Access to Spotify.getAccessToken method when the page loads and the user is not logged in to Spotify
+  componentDidMount(){
+    Spotify.getAccessToken();
+  }
+
+  search(searchTerm){ 
     // call the search method from the Spotify module passing in the searchTerm
     Spotify.search(searchTerm).then(searchResults => {
       // set the searchResults state to the searchResults returned from the Spotify.search method

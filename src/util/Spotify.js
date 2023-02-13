@@ -2,8 +2,8 @@
 const clientId = 'fefc16ee1942462bb2f82a7ea0360628';
 
 // redirectUri is the URL of the app
-// const redirectUri = 'http://jamming.javierhammad.surge.sh/';
-const redirectUri = 'http://localhost:3000/';
+const redirectUri = 'http://jamming.javierhammad.surge.sh/';
+// const redirectUri = 'http://localhost:3000/';
 
 
 
@@ -37,11 +37,13 @@ const Spotify = {
             // pushState will clear the parameters, allowing us to grab a new access token when it expires
             window.history.pushState('Access Token', null, '/');
             // return the token
+            console.log('token returned')
             return token;
         } else {
             // redirect user to the following url interpolated with the clientId and redirectUri variables
             // redirectUri needs to be added to the accepted Spotify redirect URIs on the Spotify API 
-            window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;        
+            window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;  
+            console.log('token not returned ')      
         }            
     },
     // search is a method that takes a term as an argument and returns a promise that resolves to an array of tracks that match the search term

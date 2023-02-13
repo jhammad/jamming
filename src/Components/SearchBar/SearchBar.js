@@ -17,17 +17,15 @@ class SearchBar extends React.Component {
   }
 
    // method to set the state of the searchTerm property to the value of the input element
-   handleTermChange(event) {
+   handleTermChange() {
     this.setState({ searchTerm: event.target.value });
-    event.preventDefault();
   }
 
 
   // method to call the onSearch method passed in from the App component
-  search(event) {
+  search() {
     this.props.onSearch(this.state.searchTerm);
     console.log("search in SearchBar.js")
-    event.preventDefault();
   }
 
  
